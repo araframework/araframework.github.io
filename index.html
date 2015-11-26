@@ -8,7 +8,7 @@
     <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
 
-    <title>Ara Framework by araframework</title>
+    <title>Ara Framework - A full-stack and high performance web framework</title>
   </head>
 
   <body>
@@ -19,21 +19,105 @@
         <h2>A full-stack and high performance web framework</h2>
 
         <section id="downloads">
-          <a href="https://github.com/araframework" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
+          <a href="https://github.com/araframework/ara" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
         </section>
       </div>
     </header>
 
     <div class="container">
       <section id="main_content">
-        <h3>
-<a name="milestone" class="anchor" href="#milestone"><span class="octicon octicon-link"></span></a>Milestone</h3>
+        <h3><a name="milestone" class="anchor" href="#milestone"><span class="octicon octicon-link"></span></a>Milestone</h3>
 
-<p>Version 1.0 Milestone 1</p>
+<p>Version 1.0 released</p>
 
 <pre><code>Basic configuration for web server
+Supports RESTful router rules
+Text-based handler configuration
 Basic web server with http and https
-Basic skeleton and mvc, api for developer
+Basic skeleton, api for developer
+</code></pre>
+
+<p>TODO</p>
+<pre><code>
+mvc
+namespace
+</code></pre>
+
+<h3><a name="milestone" class="anchor" href="#milestone"><span class="octicon octicon-link"></span></a>Excample</h3>
+<p>Install</p>
+<pre><code>
+go get github.com/araframework/ara
+</code></pre>
+
+<p>Dir structure overview</p>
+<pre><code>
+yourapp
+    |_conf
+    |   |_router     <-*required
+    |_static         <-optional
+    |   |_index.html
+    |   |_image
+    |   |_js
+    |   |_fonts
+    |   |_css
+    |_controller.go
+    |_main.go
+</code></pre>
+
+<p>controller.go</p>
+<pre><code>
+package main
+import (
+    "io"
+    "net/http"
+    "github.com/araframework/ara"
+)
+
+type Controller struct {
+    ara.Controller
+}
+
+// process /hello
+func (c *Controller) MyHandler(w http.ResponseWriter, r *http.Request) {
+    io.WriteString(w, "Hello, 世界")
+}
+
+// process /hello/{id}
+func (c *Controller) MyHandlerWithId(w http.ResponseWriter, r *http.Request) {
+    id := r.Form.Get("id")
+    w.Write([]byte(id))
+}
+</code></pre>
+
+<p>main.go</p>
+<pre><code>
+package main
+import (
+    "github.com/araframework/ara"
+)
+
+func main() {
+    controller := &controller.Controller{}
+
+    router := ara.NewRouter()
+    router.SetController(controller)
+
+    ara.Start(router)
+}
+</code></pre>
+
+<p>conf/router</p>
+<pre><code>
+/             FS:static
+/hello        MyHandler
+/hello/{id}   MyHandlerWithId
+</code></pre>
+
+<p>Build and run the executable file</p>
+<pre><code>
+Navigate browser to http://localhost:8600 will show the index.html
+http://localhost:8600/hellowill show Hello, 世界
+http://localhost:8600/hello/abc123 will show abc123
 </code></pre>
 
 <h3>
@@ -42,7 +126,5 @@ Basic skeleton and mvc, api for developer
 <p>Check out the documentation at <a href="http://www.araframework.org">http://www.araframework.org</a> or contact the team.</p>
       </section>
     </div>
-
-    
   </body>
 </html>
