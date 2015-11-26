@@ -38,20 +38,17 @@ Basic skeleton, api for developer
 </code></pre>
 
 <p>TODO</p>
-<pre><code>
-mvc
+<pre><code>mvc
 namespace
 </code></pre>
 
 <h3><a name="milestone" class="anchor" href="#milestone"><span class="octicon octicon-link"></span></a>Excample</h3>
 <p>Install</p>
-<pre><code>
-go get github.com/araframework/ara
+<pre><code>go get github.com/araframework/ara
 </code></pre>
 
 <p>Dir structure overview</p>
-<pre><code>
-yourapp
+<pre><code>yourapp
     |_conf
     |   |_router     <-*required
     |_static         <-optional
@@ -65,8 +62,7 @@ yourapp
 </code></pre>
 
 <p>controller.go</p>
-<pre><code>
-package main
+<pre><code>package main
 import (
     "io"
     "net/http"
@@ -90,8 +86,7 @@ func (c *Controller) MyHandlerWithId(w http.ResponseWriter, r *http.Request) {
 </code></pre>
 
 <p>main.go</p>
-<pre><code>
-package main
+<pre><code>package main
 import (
     "github.com/araframework/ara"
 )
@@ -107,15 +102,13 @@ func main() {
 </code></pre>
 
 <p>conf/router</p>
-<pre><code>
-/             FS:static
+<pre><code>/             FS:static
 /hello        MyHandler
 /hello/{id}   MyHandlerWithId
 </code></pre>
 
 <p>Build and run the executable file</p>
-<pre><code>
-Navigate browser to http://localhost:8600 will show the index.html
+<pre><code>Navigate browser to http://localhost:8600 will show the index.html
 http://localhost:8600/hellowill show Hello, 世界
 http://localhost:8600/hello/abc123 will show abc123
 </code></pre>
